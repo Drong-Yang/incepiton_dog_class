@@ -1,0 +1,9 @@
+.idea/
+__pycache__/
+*.pyc
+checkpoint/
+checkpoint1/
+*.rar
+# Model checkpoints - use git-lfs or download separately
+*.ckpt.data-00000-of-00001
+*.ckpt.index
