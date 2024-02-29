@@ -18,3 +18,18 @@ class DogBreedDataset(Dataset):
         if self.transform:
             image = self.transform(image)
         return image, self.labels.iloc[idx, 1]
+
+
+def get_transforms(train=True):
+    """Get data augmentation transforms."""
+    from torchvision import transforms
+    if train:
+        return transforms.Compose([
+            transforms.Resize((299, 299)),
+            transforms.RandomHorizontalFlip(),
+            transforms.ToTensor(),
+        ])
+    return transforms.Compose([
+        transforms.Resize((299, 299)),
+        transforms.ToTensor(),
+    ])
