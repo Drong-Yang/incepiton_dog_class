@@ -33,3 +33,7 @@ def get_transforms(train=True):
         transforms.Resize((299, 299)),
         transforms.ToTensor(),
     ])
+
+
+# TODO: add mixup and cutmix augmentation
+# TODO: implement stratified train/val split
