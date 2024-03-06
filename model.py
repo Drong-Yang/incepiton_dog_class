@@ -21,3 +21,25 @@ class InceptionBlock(nn.Module):
     def forward(self, x):
         return torch.cat([self.branch1(x), self.branch2(x),
                          self.branch3(x), self.branch4(x)], 1)
+
+
+class InceptionV3(nn.Module):
+    def __init__(self, num_classes=120):
+        super().__init__()
+        self.features = nn.Sequential(
+            nn.Conv2d(3, 32, 3, stride=2, padding=1),
+            nn.BatchNorm2d(32), nn.ReLU(),
+            nn.Conv2d(32, 64, 3, padding=1),
+            nn.BatchNorm2d(64), nn.ReLU(),
+        )
+        self.inception_blocks = nn.Sequential(
+            InceptionBlock(64, 64, 96, 128, 16, 32, 32),
+            InceptionBlock(256, 128, 128, 192, 32, 96, 64),
+        )
+        self.avgpool = nn.AdaptiveAvgPool2d((1, 1))
+        self.classifier = nn.Linear(480, num_classes)
+    def forward(self, x):
+        x = self.features(x)
+        x = self.inception_blocks(x)
+        x = self.avgpool(x).flatten(1)
+        return self.classifier(x)
