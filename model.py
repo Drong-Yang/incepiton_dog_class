@@ -62,3 +62,14 @@ class ResidualBlock(nn.Module):
         out = self.bn2(self.conv2(out))
         out += self.shortcut(x)
         return F.relu(out)
+
+
+def create_model(model_name='inception', num_classes=120, pretrained=False):
+    if model_name == 'inception':
+        return InceptionV3(num_classes)
+    elif model_name == 'resnet':
+        from torchvision.models import resnet50
+        model = resnet50(pretrained=pretrained)
+        model.fc = nn.Linear(2048, num_classes)
+        return model
+    raise ValueError(f'Unknown model: {model_name}')
