@@ -73,3 +73,8 @@ def create_model(model_name='inception', num_classes=120, pretrained=False):
         model.fc = nn.Linear(2048, num_classes)
         return model
     raise ValueError(f'Unknown model: {model_name}')
+
+
+# Model configuration reference:
+# InceptionV3: ~23M params, designed for 299x299 input
+# ResNet50:   ~25M params, designed for 224x224 input
