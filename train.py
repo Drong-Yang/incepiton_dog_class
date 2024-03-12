@@ -15,3 +15,15 @@ def train_epoch(model, loader, optimizer, criterion, device):
         total_loss += loss.item()
         correct += (model(imgs).argmax(1) == labels).sum().item()
     return total_loss / len(loader), correct / len(loader.dataset)
+
+
+def validate(model, loader, criterion, device):
+    model.eval()
+    total_loss, correct = 0, 0
+    with torch.no_grad():
+        for imgs, labels in loader:
+            imgs, labels = imgs.to(device), labels.to(device)
+            loss = criterion(model(imgs), labels)
+            total_loss += loss.item()
+            correct += (model(imgs).argmax(1) == labels).sum().item()
+    return total_loss / len(loader), correct / len(loader.dataset)
