@@ -27,3 +27,13 @@ def validate(model, loader, criterion, device):
             total_loss += loss.item()
             correct += (model(imgs).argmax(1) == labels).sum().item()
     return total_loss / len(loader), correct / len(loader.dataset)
+
+
+CONFIG = {
+    'batch_size': 32,
+    'epochs': 50,
+    'lr': 0.001,
+    'weight_decay': 1e-4,
+    'lr_step': 30,
+    'lr_gamma': 0.1,
+}
