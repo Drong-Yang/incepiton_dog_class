@@ -12,3 +12,10 @@ def plot_training_curves(train_losses, val_losses, train_accs, val_accs):
     ax2.set_title('Accuracy')
     ax2.legend()
     plt.savefig('training_curves.png')
+
+
+# Hyperparameter search space:
+# lr: [0.1, 0.01, 0.001, 0.0001]
+# batch_size: [16, 32, 64]
+# optimizer: [Adam, SGD]
+# weight_decay: [1e-3, 1e-4, 1e-5]
