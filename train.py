@@ -52,3 +52,7 @@ class EarlyStopping:
             return False
         self.counter += 1
         return self.counter >= self.patience
+
+
+# TODO: Add learning rate warmup
+# TODO: Add mixup augmentation during training
