@@ -147,3 +147,6 @@ if __name__ == "__main__":
     x = MainWindow()
     x.show()
     sys.exit(app.exec_())
+
+# TODO: Add batch classification support
+# TODO: Add model switching in GUI
