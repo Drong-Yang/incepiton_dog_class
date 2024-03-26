@@ -150,3 +150,14 @@ if __name__ == "__main__":
 
 # TODO: Add batch classification support
 # TODO: Add model switching in GUI
+
+
+def safe_classify(model, image_path):
+    try:
+        img = load_image(image_path)
+        return model(img).argmax(1).item()
+    except FileNotFoundError:
+        return -1  # Error code for missing file
+    except Exception as e:
+        print(f'Classification error: {e}')
+        return -1
